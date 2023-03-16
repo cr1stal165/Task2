@@ -55,7 +55,12 @@ public:
     Molecule(vector<Atom> atoms, vector<vector<double>> bond_energies) :
         atoms(atoms), bond_energy_matrix(bond_energies) {}
 
-
+    
+    void add_atom(Atom atom) {
+        atoms.push_back(atom);
+    }
+    
+    
     vector<Atom> get_atoms() {
         return atoms;
     }
@@ -113,12 +118,13 @@ int main(int argc, char** argv) {
     Atom atom3(3, 10, 8, 67, "iron");
     Atom atom4(9, 10, 2, 125, "oxygen");
     string type = "oxygen";
-    vector<Atom> atoms = { atom1, atom2, atom3, atom4};
+    vector<Atom> atoms = { atom1, atom2, atom3 };
     vector<vector<double>> bond_energies{{0.0, 2.1, 1.1, 1.1}, 
                                           {2.1, 0.0, 1.1, 1.1}, 
                                           {1.1, 1.1, 0.0, 1.1}, 
                                           {1.1, 1.1, 7.2, 0.0} };
     Molecule molecule(atoms, bond_energies);
+    molecule.add_atom(atom4);
     cout << "Кол-во связей в молекуле: " << molecule.get_num_bonds();
     cout << "\nКол-во атомов типа " << type << ":" << molecule.get_num_atoms_of_type(type);
     cout << "\nМасса молекулы: " << molecule.get_total_mass();
